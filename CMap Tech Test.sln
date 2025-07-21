@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36119.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMap Tech Test", "CMap Tech Test\CMap Tech Test.csproj", "{D4B0D691-FDF0-4C6E-BCE3-F7C7129DB031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetEntryTests", "TimesheetEntryTests\TimesheetEntryTests.csproj", "{20C6E9B7-1755-4414-832B-40BCDDE4D2E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4B0D691-FDF0-4C6E-BCE3-F7C7129DB031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B0D691-FDF0-4C6E-BCE3-F7C7129DB031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B0D691-FDF0-4C6E-BCE3-F7C7129DB031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B0D691-FDF0-4C6E-BCE3-F7C7129DB031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C6E9B7-1755-4414-832B-40BCDDE4D2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C6E9B7-1755-4414-832B-40BCDDE4D2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C6E9B7-1755-4414-832B-40BCDDE4D2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C6E9B7-1755-4414-832B-40BCDDE4D2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6CF9118F-B83B-492F-863B-1C11812BB878}
+	EndGlobalSection
+EndGlobal
