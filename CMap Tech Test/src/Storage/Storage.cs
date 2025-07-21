@@ -18,8 +18,21 @@ namespace CMap_Tech_Test.src.Storage
 
         public void AddEntry(Timesheet.Timesheet entry)
         {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry), "Entry cannot be null");
+            }
+            if (entry.date.DayOfWeek == DayOfWeek.Sunday || entry.date.DayOfWeek == DayOfWeek.Saturday)
+            {
+                //Assuming that weekends are not allowed for timesheet entries (barring overtime)
+                throw new ArgumentException("Entry date cannot be a weekend (Saturday or Sunday)", nameof(entry.date));
+            }
             if (entries.ContainsKey((entry.userID, entry.date)))
             {
+                if (entries[(entry.userID, entry.date)].Any(p => p.projectID == entry.projectID))
+                {
+                    throw new ArgumentException("An entry for this project already exists for this user and date");
+                }
                 entries[(entry.userID, entry.date)].Add(entry);
             } else
             {
@@ -45,6 +58,10 @@ namespace CMap_Tech_Test.src.Storage
 
         public List<Timesheet.Timesheet> ListEntries(Guid userID,  DateOnly weekBeginning)
         {
+            if (weekBeginning.DayOfWeek != DayOfWeek.Monday)
+            {
+                throw new ArgumentException("weekBeginning must be a Monday");
+            }
             List<Timesheet.Timesheet> returnList = new List<Timesheet.Timesheet>();
             for (DateOnly date = weekBeginning; date.DayOfWeek != DayOfWeek.Saturday; date = date.AddDays(1))
             {
@@ -62,6 +79,10 @@ namespace CMap_Tech_Test.src.Storage
 
         public Decimal TotalHours(Guid userID, DateOnly weekBeginning)
         {
+            if (weekBeginning.DayOfWeek != DayOfWeek.Monday)
+            {
+                throw new ArgumentException("weekBeginning must be a Monday");
+            }
             Decimal totalHours = 0;
             for (DateOnly date = weekBeginning; date.DayOfWeek != DayOfWeek.Saturday; date = date.AddDays(1))
             {

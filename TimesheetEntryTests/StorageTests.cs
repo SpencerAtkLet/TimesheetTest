@@ -20,6 +20,29 @@ namespace TimesheetEntryTests
         }
 
         [TestMethod]
+        public void AddEntry_WeekendDate_ThrowsException()
+        {
+            var userID = Guid.NewGuid();
+            var projectID = Guid.NewGuid();
+            var date = new DateOnly(2025, 07, 20); // Sunday
+            var timesheet = new Timesheet(userID, projectID, date, 8, "");
+            var storage = new Storage();
+            Assert.ThrowsException<ArgumentException>(() => storage.AddEntry(timesheet));
+        }
+
+        [TestMethod]
+        public void AddEntry_ExistingEntry_ThrowsException()
+        {
+            var userID = Guid.NewGuid();
+            var projectID = Guid.NewGuid();
+            var date = new DateOnly(2025, 07, 22);
+            var timesheet = new Timesheet(userID, projectID, date, 8, "");
+            var storage = new Storage();
+            storage.AddEntry(timesheet);
+            Assert.ThrowsException<ArgumentException>(() => storage.AddEntry(timesheet));
+        }
+
+        [TestMethod]
         public void RemoveEntry_RemovesExistingEntry_ReturnsTrue()
         {
             var userID = Guid.NewGuid();
@@ -100,6 +123,15 @@ namespace TimesheetEntryTests
         }
 
         [TestMethod]
+        public void ListEntries_NonMondayWeekStart_ThrowsException()
+        {
+            var userID = Guid.NewGuid();
+            var weekStart = new DateOnly(2025, 07, 22); // Tuesday
+            var storage = new Storage();
+            Assert.ThrowsException<ArgumentException>(() => storage.ListEntries(userID, weekStart));
+        }
+
+        [TestMethod]
         public void TotalHours_ReturnsSumOfHoursForWeek()
         {
             var userID = Guid.NewGuid();
@@ -117,6 +149,15 @@ namespace TimesheetEntryTests
             var total = storage.TotalHours(userID, weekStart);
 
             Assert.AreEqual(40, total);
+        }
+
+        [TestMethod]
+        public void TotalHours_NonMondayWeekStart_ThrowsException()
+        {
+            var userID = Guid.NewGuid();
+            var weekStart = new DateOnly(2025, 07, 22); // Tuesday
+            var storage = new Storage();
+            Assert.ThrowsException<ArgumentException>(() => storage.TotalHours(userID, weekStart));
         }
     }
 }
